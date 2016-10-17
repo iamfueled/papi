@@ -1,0 +1,95 @@
+<?php
+/**
+ * Admin form to checkout giftcard
+ */
+?>
+<?php $_code = 'giftvoucher' ?>
+<?php $_giftCards = $this->getExistedGiftCard() ?>
+
+<div class="entry-edit box-right" id="admin_giftcard_coupon">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Gift Card') ?></h4>
+    </div>
+    <fieldset class="np">
+        <div class="content">
+            <dl id="<?php echo $_code ?>_container">
+                <?php if (Mage::helper('giftvoucher')->getGeneralConfig('enablecredit', $this->getStoreId())): ?>
+                    <?php if ($_customerCredit = $this->getCustomerCredit()): ?>
+                        <dt class="<?php echo $_code ?>_credit">
+                        <input type="checkbox" name="<?php echo $_code ?>_credit" id="<?php echo $_code ?>_credit"<?php if ($this->getUseGiftCredit()): ?> checked="checked"<?php endif ?> value="1" onclick="showCartCreditInput(this)" />
+                        <label for="<?php echo $_code ?>_credit" style="font-weight: bold; color: #666;"><?php echo $this->__('Use customer credit to checkout (%s)', $this->formatBalance($_customerCredit, true)) ?></label>
+                        </dt>
+                        <dd class="<?php echo $_code ?>_credit"<?php if (!$this->getUseGiftCredit()): ?> style="display:none;"<?php endif ?>>
+                            <div>
+                                <label>
+                                    <?php echo $this->__('Use money on customer credit') ?>
+                                </label>
+                                <div class="input-box">
+                                    <input class="input-text" type="text" value="<?php echo $this->getUseGiftCreditAmount() ?>" title="<?php echo $this->__('Credit') ?>" name="credit_amount" style="width: 200px;" />
+                                </div>
+                            </div>
+                            <br />
+                        </dd>
+                    <?php endif ?>
+                <?php endif ?>
+                <dt class="<?php echo $_code ?>">
+                <input type="checkbox" name="<?php echo $_code ?>" id="<?php echo $_code ?>"<?php if ($this->getUseGiftVoucher()): ?> checked="checked"<?php endif ?> value="1" onclick="showCartGiftCardInput(this)" />
+                <label for="<?php echo $_code ?>" style="font-weight: bold; color: #666;"><?php echo $this->__('Use gift card to checkout') ?></label>
+                </dt>
+                <dd class="<?php echo $_code ?>"<?php if (!$this->getUseGiftVoucher()): ?> style="display: none;"<?php endif ?>>
+                    <ul class="form-list" id="payment_form_<?php echo $_code ?>">
+                        <?php $discounts = $this->getGiftVoucherDiscount() ?>
+                        <?php if (count($discounts)): ?>
+                            <li class="giftvoucher-discount-code">
+                                <ul>
+                                    <?php foreach ($discounts as $code => $discount): ?>
+                                        <li>
+                                            <label for="<?php echo $code ?>" style="font-weight: bold;">
+                                                <?php echo $code ?>
+                                                (<span class="giftcard_change" onclick="showGiftCardAmountInput(this);return false;" style="cursor: pointer;" title="<?php echo $this->__('Edit') ?>"><a class="giftcard-amount" href="#" onclick="return false;"><?php echo Mage::helper('checkout')->formatPrice($discount) ?></a></span><input class="input-text" type="text" value="<?php echo $discount ?>" title="<?php echo $this->__('Gift Card Amount') ?>" style="width: 88px; display: none;" disabled="disabled" name="giftcodes[<?php echo $code ?>]" />)
+                                            </label>
+                                            [<a href="#" onclick="removeGiftVoucher('<?php echo $this->getUrl('giftvoucher/adminhtml_checkout/removegift', array('code' => $code)) ?>'); return false;" title="<?php echo $this->__('Remove') ?>"><?php echo $this->__('Remove') ?></a>]
+                                        </li>
+                                    <?php endforeach ?>
+                                </ul>
+                            </li>
+                        <?php endif ?>
+                        <li id="<?php echo $_code ?>_message">
+                        </li>
+                        <li id="giftvoucher-custom-code">
+                            <label for="<?php echo $_code ?>_code"><?php echo $this->__('Gift Card Code') ?></label>
+                            <div class="input-box">
+                                <input type="text" title="<?php echo $this->__('Gift Card Code') ?>" class="input-text" id="<?php echo $_code ?>_code" name="giftvoucher_code" style="width: 200px;" />
+                            </div>
+                        </li>
+                        <?php if (count($_giftCards)): ?>
+                            <li>
+                                <label for="<?php echo $_code ?>_existed_code"><?php echo $this->__('Customer Gift Card Code') ?></label>
+                                <div class="input-box">
+                                    <select title="<?php echo $this->__('Customer Gift Card Code') ?>" class="input-select" id="<?php echo $_code ?>_existed_code" name="existed_giftvoucher_code" style="width: 205px;">
+                                        <option value=""><?php echo $this->__('-- Please Select --') ?></option>
+                                        <?php foreach ($_giftCards as $_giftCard): ?>
+                                            <option value="<?php echo $_giftCard['gift_code'] ?>"><?php echo $_giftCard['gift_code'] ?> (<?php echo $_giftCard['balance'] ?>)</option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </li>
+                        <?php endif ?>
+                    </ul>
+                </dd>
+                <dt></dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <div class="input-box" style="margin-top: 10px;">
+                                <button type="button" class="scalable" onclick="applyGiftCardForm('<?php echo $this->getUrl('giftvoucher/adminhtml_checkout/giftcardPost') ?>');">
+                                    <span><?php echo $this->__('Apply Gift Card') ?></span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+    </fieldset>
+</div>

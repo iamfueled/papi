@@ -1,0 +1,6 @@
+"Choose File","Choose file"
+"Import Subscribers","Import subscribers"
+"Invalid data format in the Row #%s","Invalid data format in the Row #%s"
+"Invalid headers: 'Email' is missed","Invalid headers: 'Email' is missed"
+"You must specify valid headers in the first row","You must specify valid headers in the first row"
+"Unknown file type. Please, make sure your file is one of supported file formats","Unknown file type. Please, make sure your file is one of supported file formats"

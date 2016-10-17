@@ -1,0 +1,400 @@
+<?php
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php
+	$_helper = $this->helper('catalog/output');
+	$_product = $this->getProduct();
+	$theme = $this->helper('ultimo');
+?>
+
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+
+
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view nested-container">
+
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        
+		<!-- FUELED: BEGIN: Multipack -->
+		<div id="fueled-multipack">
+		<!-- <div id="fueled-multipack-list"> -->
+			<?php if ($_product->getAttributeText('is_multipack') == "2-Pack"){
+				echo '<img class="fueled-colors" src="http://papiinc.com/welcome/images/multipack/2-pack.png">'; 
+			} ?> 
+			<?php if ($_product->getAttributeText('is_multipack') == "3-Pack"){
+				echo '<img class="fueled-colors" src="http://papiinc.com/welcome/images/multipack/3-pack.png">'; 
+			} ?>
+			<?php if ($_product->getAttributeText('is_multipack') == "5-Pack"){
+				echo '<img class="fueled-colors" src="http://papiinc.com/welcome/images/multipack/5-pack.png">'; 
+			} ?>
+		</div>
+		<!-- FUELED: END: Multipack -->
+		
+    	<?php
+			//Product collaterals
+			$section = array();
+			
+			//Related products. $section['related'] is set only if related products (or replacement) exist
+			$replaceRelated = $theme->getCfg('product_page/replace_related');
+			if ($replaceRelated == 1) //don't replace with static block
+			{
+				if ($tmpHtml = trim($this->getChildHtml('catalog.product.related')))
+					$section['related'] = $tmpHtml;
+				//$section['related'] = trim($this->getChildHtml('catalog.product.related'));
+			}
+			elseif ($replaceRelated == 2) //if related is empty, replace with static block
+			{
+				if ($tmpHtml = trim($this->getChildHtml('catalog.product.related')))
+					$section['related'] = $tmpHtml;
+				else //related empty
+					if ($tmpHtml = $this->getChildHtml('block_product_replace_related'))
+						$section['related'] = '<div class="block_product_replace_related">'. $tmpHtml .'</div>';
+			}
+			elseif ($replaceRelated == 3) //replace with static block
+			{
+				if ($tmpHtml = $this->getChildHtml('block_product_replace_related'))
+					$section['related'] = '<div class="block_product_replace_related">'. $tmpHtml .'</div>';
+			}
+	
+			//Up-sell products. $section['upsell'] is set only if up-sell products (or replacement) exist
+			$replaceUpsell = $theme->getCfg('product_page/replace_upsell');
+			if ($replaceUpsell == 1) //don't replace with static block
+			{
+				if ($tmpHtml = trim($this->getChildHtml('upsell_products')))
+					$section['upsell'] = $tmpHtml;
+				//$section['upsell'] = $this->getChildHtml('upsell_products');
+			}
+			elseif ($replaceUpsell == 2) //if upsell is empty, replace with static block
+			{
+				if ($tmpHtml = trim($this->getChildHtml('upsell_products')))
+					$section['upsell'] = $tmpHtml;
+				else //upsell empty
+					if ($tmpHtml = $this->getChildHtml('block_product_replace_upsell'))
+						$section['upsell'] = '<div class="block_product_replace_upsell">'. $tmpHtml .'</div>';
+			}
+			elseif ($replaceUpsell == 3) //replace with static block
+			{
+				if ($tmpHtml = $this->getChildHtml('block_product_replace_upsell'))
+					$section['upsell'] = '<div class="block_product_replace_upsell">'. $tmpHtml .'</div>';
+			}
+			
+			
+			
+			//Assign related products to selected position
+			if (isset($section['related']))
+			{
+				$relatedPosition = $theme->getCfg('product_page/related_position');
+				//TODO:remove: $relatedPosition = 11;
+				switch ($relatedPosition)
+				{
+					case 10:
+						$p['secondaryCol'][0] = $section['related'];
+						break;
+					case 11:
+						$p['secondaryCol'][1] = $section['related'];
+						break;
+					case 20:
+						$p['collatSecondaryCol'] = $section['related'];
+						break;
+				}
+			}
+			
+			
+			
+			//Width (in grid units) of product page sections
+			$imgColUnits					= $theme->getCfg('product_page/image_column');
+			$primaryColUnits				= $theme->getCfg('product_page/primary_column');
+			$secondaryColUnits				= $theme->getCfg('product_page/secondary_column');
+			$collatPrimaryColUnits			= $imgColUnits + $primaryColUnits;
+			$collatSecondaryColUnits		= $secondaryColUnits;
+			if (empty($secondaryColUnits))
+			{
+				$primaryColUnits			+= 12 - ($imgColUnits + $primaryColUnits);
+				$collatPrimaryColUnits		= 9;
+				$collatSecondaryColUnits	= 3;
+			}
+			
+			//
+			if (!isset($section['related']))
+			{
+				$collatPrimaryColUnits		= 12;
+				$collatSecondaryColUnits	= 0;
+			}
+			
+			//Grid classes
+			$imgColGridClass				= 'grid12-' . $imgColUnits;
+			$primaryColGridClass			= 'grid12-' . $primaryColUnits;
+			$secondaryColGridClass			= 'grid12-' . $secondaryColUnits;
+			$collatPrimaryColGridClass		= 'grid12-' . $collatPrimaryColUnits;
+			$collatSecondaryColGridClass	= 'grid12-' . $collatSecondaryColUnits;
+			if (empty($secondaryColUnits))
+			{
+				$secondaryColGridClass	= '';
+			}
+		?>
+
+		<!-- Small Icons -->
+        <div class="product-img-column <?php echo $imgColGridClass; ?>">
+            <?php echo $this->getChildHtml('media') ?>
+            <?php //Product labels
+				echo $this->helper('ultimo/labels')->getLabels($_product);
+			?>
+			
+        </div>
+        
+        <div class="product-shop <?php echo $primaryColGridClass; ?>">
+
+            <div class="product-name">
+                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            </div>
+            
+            <!-- 1/27/16 - Product Call Out Text  -->
+			<div style="color:red; font-size:20px;">
+				<?php echo $_product->getCallout(); ?>
+			</div>
+            
+            <?php echo $this->getReviewsSummaryHtml($_product, false, true); //reviews ?>
+            
+            <?php echo $this->getChildHtml('alert_urls'); //alerts ?>
+
+			<!-- FUELED: SKU Number display --> <!-- FUELED: Style Number display -->
+			 <p class="fueled-numbers">Style # <?php echo nl2br($_product->getStyleNo()) ?></p>
+			
+			            
+            <?php if ($_product->getShortDescription()): ?>
+                <div class="short-description">
+                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'long_description') ?></div>
+                </div>
+            <?php endif;?>
+            
+            <?php if ($extrahint_html = $this->getChildHtml('extrahint')): //qty increments ?>
+                <div class="extrahint-wrapper"><?php echo $extrahint_html; ?></div>
+            <?php endif; ?>
+            
+            <div class="product-type-data"><?php echo $this->getChildHtml('product_type_data'); ?></div>
+            
+            <?php echo $this->getTierPriceHtml(); //tier prices ?>
+
+
+			
+			<!-- BEGIN: FUELED - Color Options on Category view -->
+			<p class="delete">All Color Options</p>
+			<?php if($_product->getTypeId() == "configurable"): ?>
+			    <?php $attValConfig = $_product->getTypeInstance()->getConfigurableAttributesAsArray(); ?>
+			    <?php if(sizeof($attValConfig)): ?>
+			    <?php foreach($attValConfig as $attValConfigSingle): ?>
+					
+			        
+
+					<a name="super_attribute[<?php echo $attValConfigSingle['attribute_id'] ?>]" id="attribute<?php echo $_product->getId() ?>" class="required-entry shopthislookpageselect"></a>
+			        <?php foreach($attValConfigSingle['values'] as $attValConfigSingleVal): ?> 
+			       
+						<!-- FUELED BEGIN: -->
+						<a><img class="fueled-colors" src="http://www.papiinc.com/welcome/images/colors/<?php echo ($attValConfigSingleVal['label']); ?>.jpg"></a>
+						<?php echo '<div class="fueled-color-name-list2">' . ($attValConfigSingleVal['label']) . '</div>';?>
+						
+						<!-- FUELED END: -->
+				<?php endforeach; ?>
+
+			        <?php endforeach; ?>
+			    <?php endif; ?>
+			<?php endif; ?>	 
+			<br><br>
+			<!-- END: FUELED - Color Options on Category view -->
+			
+			
+			
+			
+			
+
+            <?php if (!$this->hasOptions()): //add to cart when no options ?>
+                <?php if($_product->isSaleable()): ?>
+                    <div class="add-to-box">
+                        <?php echo $this->getChildHtml('addtocart') ?>
+                    </div>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('extra_buttons') ?>
+            <?php endif; ?>
+
+            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                <?php if ($container1_html = $this->getChildChildHtml('container1', '', true, true)): ?>
+                    <div class="container1-wrapper"><?php echo $container1_html; ?></div>
+                <?php endif; ?>
+            <?php endif;?>
+            
+            <?php if ($addtoLinksHtml = $this->getChildHtml('addto')): //compare, wishlist, to friend ?>
+                <div class="action-box clearer">
+					<?php echo $addtoLinksHtml; 
+					
+					
+					?>
+					
+					
+					
+					<!-- FUELED: BEGIN: Size Chart -->
+
+					<a class="feature feature-icon-hover first v-centered-content cboxElement" title="Share" href="http://papiinc.com/shop/media/size-chart.jpg">
+					<span class="v-center">
+					<span class="i-size-bw icon-color-productview"></span>
+					</span>
+					<span class="v-center nudge-right">Size Chart</span>
+					</a>
+
+					<!-- FUELED: END: Size Chart -->
+				</div>
+
+            <?php endif; ?>
+            
+            <?php echo $this->getChildHtml('other'); ?>
+
+            <?php if ($tmpHtml = $this->getChildHtml('block_product_primary_bottom')): ?>
+            	<div class="feature-wrapper top-border block_product_primary_bottom"><?php echo $tmpHtml; ?></div>
+            <?php endif; ?>
+            
+            <?php if ($tmpHtml = $this->getChildHtml('product_primary_bottom_placeholder')): //Placeholder for extensions ?>
+            	<div class="feature-wrapper top-border"><?php echo $tmpHtml; ?></div>
+            <?php endif; ?>
+
+        </div> <!-- end: product-shop -->
+        
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+        <?php if ($secondaryColUnits): //(!empty($secondaryColUnits)): ?>
+            <div class="product-secondary-column <?php echo $secondaryColGridClass; ?> custom-sidebar-right">
+            	<div class="inner">
+            		<div class="help">
+						<h1>Need Help?</h1>
+						<a href="http://papiinc.com/welcome/index.php/shipping-and-returns/">Shipping Options</a>
+						<span class="description">Free shipping on all orders over $50</span><br><br>
+
+						<a href="http://papiinc.com/welcome/index.php/contact-us">Have questions?</a>
+						<span class="description">Call us at 305.594.4455</span><br><br>
+
+						<a href="http://papiinc.com/welcome/index.php/newsletter">Subscribe Today</a>
+						<span class="description">Get the inside scoop on your favorite brand</span>
+					</div>
+					<div class="latest">
+						<h1>The Latest</h1>
+						<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://papiinc.com/blog/feed/",rssmikle_frame_width: "300",rssmikle_frame_height: "400",frame_height_by_article: "0",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "on",autoscroll: "on",scrolldirection: "up",scrollstep: "4",mcspeed: "20",sort: "Off",rssmikle_title: "off",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#FF0000",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "55",rssmikle_item_title_color: "#000000",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "150",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "15",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:300px;"><a href="http://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!--  end  feedwind code -->
+					</div>
+				</div>
+            </div> <!-- end: product-secondary-column -->
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+			<?php if ($container2_html = $this->getChildChildHtml('container2', '', true, true)): ?>
+        		<div class="box-additional <?php echo $collatPrimaryColGridClass; ?>">
+					<div class="container2-wrapper"><?php echo $container2_html; ?></div>
+				</div>
+        	<?php endif; ?>
+        <?php endif; ?>
+
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
+
+    <script type="text/javascript">
+	var $j = jQuery.noConflict(); 
+	$j(document).ready(function(){
+		$j('.product-secondary-column .feature:nth-child(1)').wrap('<a href="http://papiinc.com/welcome/index.php/shipping-and-returns/"></a>');
+		$j('.product-secondary-column .feature:nth-child(2)').wrap('<a href="http://papiinc.com/welcome/index.php/contact-us"></a>');
+		$j('.product-secondary-column .feature:nth-child(3)').wrap('<a href="http://papiinc.com/welcome/index.php/newsletter"></a>');
+	});
+	</script>
+
+	<?php
+    //add the customtab to the product tab
+    $attribute = $_product->getResource()->getAttribute('size_chart');
+    if(is_object($attribute)){
+      $identifier = $_product->getData("size_chart");
+      }
+    $blockcustom =  Mage::app()->getLayout()->createBlock('cms/block')->setBlockId($identifier);
+    $blockcustommodel = Mage::getModel('cms/block')->load($identifier);
+    $customtitle = $blockcustommodel->getTitle();
+    $customtab = $blockcustom->toHtml();
+    ?>
+
+	<div class="box-additional box-tabs <?php echo $collatPrimaryColGridClass; ?>">
+    	<?php $info_tabs_html = trim($this->getChildHtml('info_tabs'));
+			if ($info_tabs_html) echo $info_tabs_html; ?>
+
+		<?php //Open the "Reviews" tab, when "X Review(s)" or "Be the first to review this product" links are clicked ?>
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(function($){$("#goto-reviews, #goto-reviews-form").click(function(){if($("#product-tabs").hasClass("accor")){$("#product-tabs .tabs-panels").data("tabs").click($(".tabs-panels .acctab").index($("#acctab-tabreviews")))}else{$("#product-tabs .tabs").data("tabs").click($("#tab-tabreviews").index())}})});
+		//]]>
+		</script>
+        
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+	</div> <!-- end: box-tabs -->
+        
+    <?php if (isset($p['collatSecondaryCol'])): ?>
+		<div class="box-additional box-sidebar custom-sidebar-right <?php echo $collatSecondaryColGridClass; ?>">
+			<div class="inner"><?php echo $p['collatSecondaryCol']; ?></div>
+		</div>
+	<?php endif; ?>
+         
+    <?php if (isset($section['upsell'])): ?>
+    	<div class="box-additional box-up-sell <?php echo $collatPrimaryColGridClass; ?>"><?php echo $section['upsell']; ?></div>
+    <?php endif; ?>
+    
+
+</div> <!-- end: product-view -->
+
+

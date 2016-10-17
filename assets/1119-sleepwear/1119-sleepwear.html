@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<title>Untitled</title>
+<!--Adobe Edge Runtime-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+	<script>
+	var custHtmlRoot=""; 
+	var script = document.createElement('script'); 
+	script.type= "text/javascript";
+script.src = custHtmlRoot+"edge_includes/edge.5.0.0.min.js";
+	var head = document.getElementsByTagName('head')[0], done=false;
+	script.onload = script.onreadystatechange = function(){
+		if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+			done=true;
+			var opts ={
+    scaleToFit: "both",
+    centerStage: "none",
+    minW: "0",
+    maxW: "undefined",
+    width: "2000px",
+    height: "660px"
+};
+			opts.htmlRoot =custHtmlRoot;
+			AdobeEdge.loadComposition('1119-sleepwear', 'EDGE-532572108', opts,
+			{"style":{"${symbolSelector}":{"isStage":"true","rect":["undefined","undefined","2000px","660px"],"fill":["rgba(255,255,255,1)"]}},"dom":[{"rect":["969","321","62px","18px","auto","auto"],"id":"preloader2","fill":["rgba(0,0,0,0)","images/preloader2.gif","0px","0px"],"type":"image","tag":"img"}]}, {"style":{"${symbolSelector}":{"isStage":"true","rect":["undefined","undefined","2000px","660px"]}},"dom":[{"rect":["0","0","2000px","660px","auto","auto"],"id":"Poster","fill":["rgba(0,0,0,0)","images/Poster.png","0px","0px"],"type":"image","tag":"img"}]});		
+			script.onload = script.onreadystatechange = null;
+			head.removeChild(script);
+		}
+	};
+	head.appendChild(script);
+	</script>
+	
+	    <style>
+        .edgeLoad-EDGE-532572108 { visibility:hidden; }
+    </style>
+
+<!--Adobe Edge Runtime End-->
+
+</head>
+<body style="margin:0;padding:0;">
+	<div id="Stage" class="EDGE-532572108">
+	</div>
+</body>
+</html>

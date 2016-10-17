@@ -1,0 +1,30 @@
+<?php
+/**
+ * Gift Voucher template
+ */
+?>
+<div class="customer-account-giftcard">
+    <div class="page-title">
+        <h1><?php echo $this->__('Gift card') ?></h1>
+    </div>
+    <div class="balance">
+        <div class="amount">
+            <?php if (Mage::helper('giftvoucher')->getGeneralConfig('enablecredit')) { ?>
+                <?php echo $this->__('My credit balance: ') ?><span class="regular-price"><span><?php echo $this->getBalanceAccount() ?></span></span>
+            <?php } ?>
+            <button type="button" style="float: right"class="form-button button right" onclick="setLocation('<?php echo $this->getUrl('giftvoucher/index/addredeem') ?>')">
+                <?php if (Mage::helper('giftvoucher')->getGeneralConfig('enablecredit')) { ?>
+                    <span><span><?php echo $this->__('Add / Redeem a Gift Card') ?></span></span>
+                <?php } else { ?>
+                    <span><span><?php echo $this->__('Add a Gift Card') ?></span></span>
+                <?php } ?>
+            </button>
+        </div>
+        <?php if (Mage::helper('giftvoucher')->getGeneralConfig('enablecredit')) { ?>
+        <div class="button">
+            <a class="left" href="<?php echo $this->getUrl('giftvoucher/index/history') ?>"><?php echo $this->__('View detail') ?></a>
+        </div>
+        <?php } ?>
+    </div>
+    <?php echo $this->getGridHtml() ?>
+</div>

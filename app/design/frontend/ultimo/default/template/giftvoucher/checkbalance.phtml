@@ -1,0 +1,59 @@
+<?php
+/**
+ * Gift Voucher check balance template
+*/
+?>
+<div class="page-title">
+	<h1><?php echo $this->__('Check eGift Card Balance') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="giftvoucher_form">
+	<div class="fieldset giftvoucher-fieldset">
+		<ul class="form-list" id="giftvoucher-check-balance">
+			<li>
+				<label for="giftvoucher_code" class="required"><em>*</em><?php echo $this->__('Enter your eGift Card code') ?></label>
+				<div class="input-box">
+					<input type="text" title="<?php echo $this->__('eGift Card code') ?>" class="input-text required-entry" id="giftvoucher_code" name="code" value="<?php //echo $this->getCode() ?>" <?php if (!Mage::helper('giftvoucher')->isAvailableToAddCode()) echo 'disabled="true"' ?> />
+				</div>
+			</li>
+			<li>
+				<div class="input-box">
+					<button class="button" onclick="giftvoucherForm.submit();"><span><span><?php echo $this->__('Check eGift Card') ?></span></span></button>
+				</div>
+			</li>
+		</ul>
+	</div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+var giftvoucherForm = new VarienForm('giftvoucher_form',true);
+//]]>
+</script>
+<?php $giftVoucher = $this->getGiftVoucher() ?>
+<?php if ($giftVoucher): ?>
+<div class="page-title">
+	<h1><?php echo $this->__('Result') ?></h1>
+</div>
+<div class="fieldset giftvoucher-fieldset">
+	<ul class="form-list" id="giftvoucher-result">
+		<li>
+			<label for="result_giftvoucher_code"><?php echo $this->__('eGift Card code') ?></label>
+			<span id="result_giftvoucher_code"><strong><?php echo $this->getCodeTxt() ?></strong></span>
+		</li>
+		<li>
+			<label for="balance"><?php echo $this->__('Balance') ?></label>
+			<span id="balance"><strong><?php echo $this->getBalanceFormat($giftVoucher) ?></strong></span>
+		</li>
+		<li>
+			<label for="status"><?php echo $this->__('Status') ?></label>
+			<span id="status"><?php echo $this->getStatus($giftVoucher) ?></span>
+		</li>
+		<?php if ($expiredAt = $giftVoucher->getExpiredAt()): ?>
+		<li>
+			<label for="expired_at"><?php echo $this->__('Expired at') ?></label>
+			<span id="expired_at"><?php echo $this->formatDate($expiredAt) ?></span>
+		</li>
+		<?php endif ?>
+	</ul>
+</div>
+<?php endif ?>

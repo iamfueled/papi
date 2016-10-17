@@ -1,0 +1,120 @@
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/* *     { background:none !important; text-align:left !important; } */
+*{
+	font-size:10px !important;
+}
+.sticker{
+	border-radius: 50% !important;
+	background-color:#ff0000 !important;
+	background:red;
+    font-size: 9px !important;
+    color: #ffffff !important;
+    height: 50px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    width: 50px !important;
+}
+html{ 
+	margin:0 !important; 
+	padding:0 !important;
+	width:8.5in;
+}
+body{
+	background:#fff !important; 
+	font: 9pt/1.5 Arial, sans-serif;
+	padding:0px !important; 
+	margin:0px !important; 
+	border:0px !important;
+}
+a{ 
+	color:#2976c9 !important; 
+	font-size:9px !important;
+}
+th,td{ 
+	color:#2f2f2f !important;  
+	border:none !important; 
+}
+
+.header-container,.nav-container,.footer-container,.pager,.toolbar,.actions,.buttons-set { 
+	display:none !important; 
+}
+.wrapper{
+	border:none !important;
+}
+.main{
+	padding:0px !important;
+}
+/* Sale Section */
+#camera_wrap_1,
+h2.noprint,
+.noprint,
+#fueled-color-box,
+.breadcrumbs,
+#top,
+.page-title,
+#nav,
+button
+{
+	display:none !important;
+}
+h2.product-name a,
+span.price{
+	font-size:8px !important;
+}
+.special-price{
+	font-size:9px !important;
+}
+.page-title{
+	margin-top:-45px !important;
+	z-index:99999;
+	background-color:white !important;
+}
+li.item{
+	height:170px !important;
+	transform:(.7,.7);
+	margin-bottom: 40px !important;
+}
+.price-box{
+	float:left;
+	width:100%;
+}
+img.fueled-colors{
+	width:60% !important;
+	height:60% !important;
+}
+.img{
+	width:30% !important;
+}
+..product-view .product-type-data .price-box, .container1-wrapper, .container2-wrapper, 
+.product-view .add-to-box, .category-products-grid .item, .products-list li.item, .remember-me-popup h3, 
+.map-popup-heading{
+	border: none !important;
+}
+.item{
+	width:22% !important;
+	padding-right:68px !important;
+	border:none !important;
+}

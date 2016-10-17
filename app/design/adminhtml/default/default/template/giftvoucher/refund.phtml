@@ -1,0 +1,34 @@
+<?php
+/**
+ * Refund for Credit or Gift Card
+ */
+?>
+<?php if ($this->getIsShow()): ?>
+<p>
+    <label for="creditmemo_giftcard_refund">
+        <?php if ($this->getCustomer() && Mage::helper('giftvoucher')->getGeneralConfig('enablecredit', $this->getOrder()->getStoreId())): ?>
+            <?php echo $this->__('Refund to customer credit balance') ?>
+        <?php else: ?>
+            <?php echo $this->__('Refund to customer gift card code used to check out') ?>
+        <?php endif ?>
+    </label>
+    <input type="text" name="creditmemo[giftcard_refund]" value="<?php echo $this->getMaxAmount() ?>" id="creditmemo_giftcard_refund" class="input-text not-nagetive-amount" style="width: 60px; text-align: right;" onchange="updateChangeGiftCardAmount(this)" />
+</p>
+<script type="text/javascript">
+    function updateChangeGiftCardAmount(el) {
+        if (isNaN(parseFloat(el.value))) {
+            el.value = 0;
+            return true;
+        }
+        if (parseFloat(el.value) < 0) {
+            el.value = 0;
+            return true;
+        }
+        if (parseFloat(el.value) > <?php echo $this->getMaxAmount() ? $this->getMaxAmount() : '0' ?>) {
+            el.value = <?php echo $this->getMaxAmount() ? $this->getMaxAmount() : '0' ?>;
+            return true;
+        }
+    }
+</script>
+<?php endif ?>
+

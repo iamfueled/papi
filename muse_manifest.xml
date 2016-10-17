@@ -1,0 +1,47 @@
+<manifest alg="2" build="30" opt="true" iceEnabled="true" exportTarget="other" resolutions="1x" timestamp="1418671380160">
+  <folder name="assets">
+    <folder name="1119-sleepwear">
+      <folder name="edge_includes">
+        <file name="edge.5.0.0.min.js" crc="430951529" mt="1416498324000"/>
+      </folder>
+      <folder name="images">
+        <file name="1119-Sleepwear.png" crc="221730058" mt="1416498324000"/>
+        <file name="edge-_0000_logo.png" crc="501136683" mt="1416498324000"/>
+        <file name="edge-_0001_button.png" crc="3947566664" mt="1416498324000"/>
+        <file name="edge-_0002_arrow.png" crc="103558634" mt="1416498324000"/>
+        <file name="edge-_0003_SHOP-NOW.png" crc="141403422" mt="1416498324000"/>
+        <file name="edge-_0004_Comfort-&amp;-Style.png" crc="3873583830" mt="1416498324000"/>
+        <file name="edge-_0005_Sleepwear.png" crc="3836161879" mt="1416498324000"/>
+        <file name="edge-_0006_gradient.png" crc="3894899766" mt="1416498324000"/>
+        <file name="edge-_0007_right.png" crc="4214013044" mt="1416498324000"/>
+        <file name="edge-_0007_right2.png" crc="4214013044" mt="1416498324000"/>
+        <file name="edge-_0008_left.png" crc="292839015" mt="1416498324000"/>
+        <file name="edge-_0009_Background.png" crc="99827001" mt="1416498324000"/>
+        <file name="Poster.png" crc="436678351" mt="1416498324000"/>
+        <file name="preloader2.gif" crc="287767951" mt="1416498324000"/>
+      </folder>
+      <file name="1119-sleepwear_edge.js" crc="4239716433" mt="1416498324000"/>
+      <file name="1119-sleepwear.html" crc="299443068" mt="1416498324000"/>
+    </folder>
+  </folder>
+  <folder name="css">
+    <file name="site_global.css" crc="4061856311"/>
+    <file name="index.css" crc="477107409" ref="index"/>
+  </folder>
+  <folder name="scripts">
+    <file name="jquery-1.8.3.min.js" crc="4245411419" ref="index"/>
+    <file name="museutils.js" crc="353204447" ref="index"/>
+    <file name="jquery.watch.js" crc="3923049248" ref="index"/>
+  </folder>
+  <folder name="images">
+    <file name="marketing.jpg" crc="195977442" ref="index"/>
+    <file name="join.jpg" crc="184365002" ref="index"/>
+    <file name="fb.png" crc="3930444410" ref="index"/>
+    <file name="tw.png" crc="4003440980" ref="index"/>
+    <file name="gp.png" crc="181995008" ref="index"/>
+    <file name="pn.png" crc="4256437573" ref="index"/>
+    <file name="in.png" crc="390345187" ref="index"/>
+    <file name="sub.jpg" crc="4159976881" ref="index"/>
+  </folder>
+  <file name="index.html" crc="187467497" mt="1418671356342" redirect="true"/>
+</manifest>

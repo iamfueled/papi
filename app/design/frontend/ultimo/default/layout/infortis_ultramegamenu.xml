@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<default>
+	
+		<reference name="head">
+			<!-- CSS -->
+			<action method="addItem"><type>skin_css</type><name>css/infortis/_shared/itemgrid.css</name><params/></action>
+			<action method="addItem"><type>skin_css</type><name>css/infortis/_shared/accordion.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/infortis/ultra-megamenu/ultra-megamenu.css</name></action>
+			<action method="addItem"
+				ifconfig="ultramegamenu/mainmenu/classic_menu"><type>skin_css</type><name>css/infortis/ultra-megamenu/classic.css</name><params/></action>
+			<action method="addItem"
+				ifconfig="ultramegamenu/mainmenu/wide_menu"><type>skin_css</type><name>css/infortis/ultra-megamenu/wide.css</name><params/></action>
+			
+			<!-- js -->
+			<action method="addJs"><script>infortis/jquery/jquery-1.7.2.min.js</script></action>
+			<action method="addJs"><script>infortis/jquery/jquery-noconflict.js</script></action>
+			
+			<action method="addJs"><script>infortis/jquery/plugins/jquery.easing.min.js</script></action>
+			<action method="addJs"><script>infortis/jquery/plugins/jquery.accordion.min.js</script></action>
+			
+			<!-- TODO: -->
+			<action method="removeItem"
+				ifconfig="ultramegamenu/mainmenu/wide_menu"><type>js</type><name>varien/menu.js</name><params/></action>
+        </reference>
+
+		<reference name="top.menu">
+			<action method="unsetChild"><name>catalog.topnav</name></action>
+			<block type="ultramegamenu/navigation" name="catalog.topnav.menu" template="infortis/ultramegamenu/mainmenu.phtml"/>
+        </reference>
+		
+		<reference name="catalog.topnav.menu">
+			<block type="cms/block" name="block_header_nav_dropdown">
+				<action method="setBlockId"><block_id>block_header_nav_dropdown</block_id></action>
+			</block>
+			<block type="cms/block" name="block_nav_links">
+				<action method="setBlockId"><block_id>block_nav_links</block_id></action>
+			</block>
+		</reference>
+		
+    </default>
+	
+	
+	<!-- Default category (without layered navigation) -->
+	<catalog_category_default>
+		
+		<reference name="left">
+			<block type="ultramegamenu/navigation" name="infortis.vertnav" template="infortis/ultramegamenu/sidemenu.phtml" before="-" />
+        </reference>
+		
+	</catalog_category_default>
+	
+	
+	<!-- Category with layered navigation -->
+	<catalog_category_layered>
+		
+		<reference name="left">
+			<block type="ultramegamenu/navigation" name="infortis.vertnav" template="infortis/ultramegamenu/sidemenu.phtml" before="-" />
+        </reference>
+		
+		<reference name="catalog.leftnav">
+			<action method="unsetChild"
+				ifconfig="ultramegamenu/sidemenu/hide_laynav_categories"><alias>category_filter</alias></action>
+		</reference>
+		
+	</catalog_category_layered>
+
+</layout> 

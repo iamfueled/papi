@@ -1,0 +1,127 @@
+<html>
+<!--@subject A gift card from {{htmlescape var=$sendername}} @-->
+<!--@vars
+{"htmlescape var=$name":"Recipient Name",
+"htmlescape var=$sendername":"Sender name",
+"var code":"Gift Card Code",
+"var balance":"Gift Card Balance",
+"var status":"Status",
+"htmlescape var=$message":"Message",
+"var expiredat":"Expired At"}
+@-->
+
+<!--@styles
+body,td { background:#FFFFFF; margin:0; padding:0; color:#2f2f2f; font:13px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+pre{ white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
+@-->
+
+<div style="font:13px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}">
+								<img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/>
+							</a>
+						</td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p>
+								<strong>Dear {{htmlescape var=$name}}</strong>,<br/>
+								We are glad to inform that <strong>{{htmlescape var=$sendername}}</strong> sent you a Gift Card from {{var store.getFrontendName()}}.<br/>
+                                You can comfortably use the Gift Card(s) to make purchases at <a href="{{store url=""}}">{{var store.getFrontendName()}}</a> or add it to your list by clicking <a href="{{var addurl}}"> here</a>.<br/>
+							</p>
+                            <p>
+								<div class="wrap-box" style="background:#000 url('http://papiinc.com/welcome/images/header.jpg')no-repeat; width:655px; overflow:hidden; padding:0 0 20px 0;">
+									<div class="box-content" style="padding:24px 36px 11px 33px;">
+										<div class="title-logo" style="float:left; width:100%;">
+											<div class="title" style="float:left;">
+												<br><br><br><br><br><br><br><br><br><br><br>
+											</div>
+											<div>
+
+											</div>
+										</div>
+										<div class="info-details" style="padding-top:30px; float:left; width:100%;">
+											<ul class="form-list" style="list-style:none; margin:0; padding:0;">
+												<li style="float:left; width:100%; margin-bottom:15px;">
+													<label style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#fff; text-transform:uppercase; float:left;">Expiration Date:</label>
+													<div class="value" style="float:left; border-bottom:1px dashed #fff; width:77%; line-height:13px; padding-left:5px; color:#bababa;font-size:16px;">
+													{{if expiredat}}
+														{{var expiredat}}
+													{{else}}
+														Permanent
+													{{/if}}
+													</div>
+												</li>
+												<li style="float:left; width:100%; margin-bottom:15px;">
+													<label style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#fff; text-transform:uppercase; float:left;">To:</label>
+													<div class="value" style="float:left; border-bottom:1px dashed #fff; width:93%; line-height:13px; padding-left:5px; color:#bababa;font-size:16px;">
+														&nbsp;{{htmlescape var=$name}}
+													</div>
+												</li>
+                                                {{if message}}
+												<li style="float:left; width:100%; margin-bottom:15px;">
+													<label style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#fff; text-transform:uppercase; float:left;">Message:</label>
+													<div class="value" style="float:left; width:84%; line-height:16px; padding-left:5px; color:#bababa;">
+														{{var message}}
+													</div>
+												</li>
+                                                {{/if}}
+												<li style="float:left; width:100%; margin-bottom:15px;">
+													<label style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#fff; text-transform:uppercase; float:left;">From:</label>
+													<div class="value" style="float:left; border-bottom:1px dashed #fff; width:89%; line-height:13px; padding-left:5px; color:#bababa;font-size:16px;">
+														&nbsp;{{htmlescape var=$sendername}}
+													</div>
+												</li>
+												<li style="float:left; width:100%; margin-bottom:3px;">
+													<div class="redemption" style="float:left; width:215px;">
+														<label style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#fff; text-transform:uppercase; float:left;">Redemption:</label>
+														<div class="input-box" style="float:left; width:110px; padding-left:10px;">
+															<input type="text" value="{{var code}}" name="redemption" style="width:232px; border:1px solid #999999; color:#bababa; font-weight:bold; font-size: 15px; position: relative; top: -5px;" readonly="true" />
+														</div>
+													</div>
+													<div class="total-value" style="float:right;margin-right: 15px;">
+														<label style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#fff; text-transform:uppercase; float:left;">To the value of:</label>
+														<div class="value" style="float:left; border-bottom:1px dashed #fff;line-height:13px; padding-left:5px; color:#bababa; font-weight:bold;font-size:18px;">
+															{{var balance}}
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="term-condition">
+											<strong style="float:left; width:100%; font-size:12px; font-weight:bold; font-family:Arial, Helvetica, sans-serif; color:#424242;margin:10px 0 0 0;">Notes:</strong>
+											<p style="float:left; width:100%;font-size:12px; font-weight:normal; font-family:Arial, Helvetica, sans-serif; margin:0; color:#686868;">
+                                                {{if noactive}}
+                                                This Gift card's status is  {{var status}} and cannot be used yet. Please wait until it is activated.<br/>
+                                                {{/if}}
+                                                {{var note}}
+                                                {{if description}}
+                                                <br/>{{var description}}
+                                                {{/if}}
+                                            </p>
+										</div>
+									</div>
+								</div>
+                            </p>
+                            <p>
+								If you have any questions on your Gift card, please feel free to contact us at <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> or by phone at {{config path='general/store_information/phone'}}.
+							</p>
+                            <p>Yours sincerely,<br/><strong>{{var store.getFrontendName()}}</strong></p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</html>

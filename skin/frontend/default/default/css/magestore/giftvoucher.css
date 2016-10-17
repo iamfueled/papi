@@ -1,0 +1,147 @@
+/**
+* Giftvoucher reward template
+*/
+span#giftvoucher_wait{
+	color: #2F2F2F;
+}
+
+.giftvoucher-discount-code{
+	color: #008000;
+}
+
+.giftvoucher-discount-code button{
+	border: medium none;
+	background: none repeat scroll 0 0 transparent;
+}
+
+.giftvoucher-discount-code button:hover{
+	cursor: pointer;
+}
+
+.giftvoucher-media{
+	border: 2px solid #F7F9F9;
+}
+
+.giftvoucher-media .giftmedia{
+	border-bottom: 2px solid #F7F9F9;
+	padding: 7px;
+	color: #F18200;
+	font-size: 15px;
+}
+
+#giftmedia pre{
+ white-space: pre-wrap;
+ white-space: -moz-pre-wrap;
+ white-space: -pre-wrap;
+ white-space: -o-pre-wrap;
+ word-wrap: break-word;
+}
+
+.giftvoucher-media .giftmedia-image{
+	overflow: hidden;
+	width: 265px;
+	position: relative;
+}
+
+.giftvoucher-product-info .giftvoucher-amount-desc, .giftvoucher-product-info #recipient_ship_desc {
+    font-size: 0.9em;
+    font-style: italic;
+    color: #080;
+    margin-top: -5px;
+}
+
+.giftvoucher-product-info #message{
+	width: 325px;
+	height: 88px;
+}
+
+.giftvoucher-product-info #recipient_address{
+	width: 325px;
+	height: 57px;
+}
+
+.giftvoucher-product-info #recipient_email{
+	width: 325px;
+}
+
+.giftvoucher-product-info #recipient_name{
+	width: 325px;
+}
+
+#giftvoucher-result{
+	font-size: 15px;
+}
+
+#giftvoucher-result label{
+	width: 160px;
+}
+
+
+/* Search Grid Style */
+.data-table .giftvoucher-grid-title th{
+    background-image: none;
+    border-bottom: 1px solid #C2D3E0;
+}
+
+.data-table .giftvoucher-grid-search th{
+    vertical-align: top;
+}
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item{
+    padding-bottom: 2px;
+}
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .search-text{
+    width: 97%;
+}
+
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .range-container{
+    float: left;
+    padding-bottom: 2px;
+}
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .data-range{
+    min-width: 121px;
+    min-height: 18px;
+    margin-bottom: 3px;
+}
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .data-range .label{
+    display: block;
+    width: 36px;
+    float: left;
+}
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .data-range img{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .data-range input.range-text{
+    float: right;
+    width: 50px;
+    padding: 1px;
+}
+
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item select{
+    width: 100%;
+}
+
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .range-container .from-price,
+.data-table .giftvoucher-grid-search .giftvoucher-grid-search-item .range-container .to-price{
+    min-width: 100px;
+}
+
+.giftvoucher-search-button {
+    padding-bottom: 5px;
+    text-align: right;
+}
+/* End Search */
+.customer-account-giftcard .balance{
+    overflow: hidden; 
+    margin-bottom: 10px; 
+    border-bottom: 1px dotted black;
+}
+.customer-account-giftcard #giftvoucher_grid .gift-voucher-sent-friend{
+    background-color: #F6B26B;
+}
+.customer-account-giftcard .account-balance{
+    overflow: hidden; 
+    margin-bottom: 10px; 
+    border-bottom: 1px dotted black;
+}

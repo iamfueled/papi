@@ -1,0 +1,5 @@
+"Choose File","Оберіть файл"
+"Import Subscribers","Імпорт списку підписчиків"
+"Invalid headers: 'Email' is missed","Невірні заголовки: пропущено 'Email'"
+"You must specify valid headers in the first row","Ви повинні вказати правильні заголовки в першому рядку"
+"Unknown file type. Please, make sure your file is one of supported file formats","Невірний тип файлу. Будь ласка, переконайтеся що він входить в число підтримуваних форматів"

@@ -1,0 +1,38 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+?>
+<?php 
+$_fields = $this->getStaticFields();
+?>
+
+<div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend">Static Fields Information</h4>
+    <div class="form-buttons"></div>
+</div>
+<div id="static_fieldset" class="fieldset ">
+    <div class="hor-scroll">
+	    <table class="form-list">
+	    	<tr>
+	    		<th class="label" style="padding-left: 5px;"><?php echo $this->__('Field Label'); ?></th>
+	    		<th class="label" style="padding-left: 5px;"><?php echo $this->__('Field Value'); ?></th>
+	    		<th class="label" style="padding-left: 5px;"><?php echo $this->__('Position'); ?></th>
+	    	</tr>
+	    	<?php for ($i = 0; $i < $this->getFieldsCount(); $i++): ?>
+	    	<tr>
+				<td class="value"><input type="text" class="input-text" name="static[<?php echo $i; ?>][label]" value="<?php echo isset($_fields[$i]['label']) ? $_fields[$i]['label'] : ''; ?>" /></td>
+				<td class="value"><input type="text" class="input-text" name="static[<?php echo $i; ?>][value]" value="<?php echo isset($_fields[$i]['value']) ? $_fields[$i]['value'] : ''; ?>" /></td>
+				<td class="value">
+					<select class="select" name="static[<?php echo $i; ?>][position]" style="min-height: 19px; width: 130px;">
+						<option value="1" <?php echo (isset($_fields[$i]['position']) && 1 == $_fields[$i]['position']) ? 'selected="selected"' : ''; ?>><?php echo $this->__('At The Beginning'); ?></option>
+						<option value="2" <?php echo (isset($_fields[$i]['position']) && 2 == $_fields[$i]['position']) ? 'selected="selected"' : ''; ?>><?php echo $this->__('At The End'); ?></option>
+					</select>
+				</td>
+			</tr>
+	    	<?php endfor; ?>
+	    </table>
+    </div>
+</div>

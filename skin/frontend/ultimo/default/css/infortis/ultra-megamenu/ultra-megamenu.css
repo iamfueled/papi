@@ -1,0 +1,297 @@
+/*
+ * Navigation menu
+ */
+
+
+
+/* Common styling for main menu (horizontal + mobile vertical + mobile menu trigger)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* horizontal + mobile menu trigger */
+#mobnav-trigger,
+#nav > li > a {
+	font-size:16px; /*1.3333em*/
+	line-height:49px; /*3.0625em*/
+}
+
+
+/* Main menu - vertical (in the sidebar)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.vertnav-side {
+	float:left;
+	width:100%;
+}
+
+
+/* Main menu - mobile vertical (in the header)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Mobile menu trigger. Shares style with the 1st level links from the default menu
+-------------------------------------------------------------- */
+#mobnav { display:none; }
+#mobnav-trigger {
+	display:block;
+	padding:0 15px;
+}
+
+/* Mobile menu icon */
+#mobnav-trigger .trigger-icon {
+	display:block;
+	float:left;
+	width:23px;
+	padding-top:18px;
+	margin:0 8px 0 0;
+}
+#mobnav-trigger .trigger-icon .line {
+	display:block;
+	background-color:#fff;
+	height:3px;
+	margin-bottom:2px;
+}
+
+/* Mobile menu elements
+-------------------------------------------------------------- */
+.nav-container .vertnav-top { /* Added wrapper-class to make selector more specific and prevent overridding */
+	display:none;
+	margin-top:0 !important;
+}
+.vertnav-top.mobile {
+	display:block; /* Visible even if when collapsed (to show bottom border) */
+	
+	overflow:hidden;
+	height:auto;
+	max-height:0px;
+	-moz-transition-property:max-height;
+	-moz-transition-duration:500ms;
+	-moz-transition-timing-function:ease-in-out;
+}
+.vertnav-top.mobile.show {
+	max-height:9999px;
+	-moz-transition-property:max-height;
+	-moz-transition-duration:500ms;
+	-moz-transition-timing-function:ease-in-out;
+}
+
+.vertnav-top li a {
+	text-transform:uppercase;
+}
+
+
+/* Main menu - horizontal
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+#nav {
+	position:relative; /* Dropdown custom block position is relative to this element */
+	z-index:2000;
+}
+#nav.mobile { display:none; } /* Hide on mobile */
+#nav .opener { display:none; }
+
+/* Show the bottom line and fill in the gap */
+/*#nav { border-bottom:5px solid #333; }
+#nav > li { border-bottom:5px solid transparent; margin-bottom:-5px; }*/
+
+/* All levels
+-------------------------------------------------------------- */
+#nav li { text-align:left; }
+#nav li a { display:block; text-decoration:none; }
+#nav li.parent {}
+#nav li a span { display:block; white-space:nowrap; }
+#nav li ul a span { white-space:normal; }
+
+/* 1st level only
+-------------------------------------------------------------- */
+#nav > li { float:left; }
+#nav > li > a { display:block; padding:0 15px; }
+#nav > li.parent > a {
+	padding-right:20px;
+	background:url(../../../images/infortis/ultra-megamenu/arrow-dropdown.png) no-repeat 100% center;
+}
+
+/* Drop-down boxes:
+	wide:    2nd-level category drop-down box + custom block drop-down box
+	classic: custom block drop-down box
+-------------------------------------------------------------- */
+#nav .level0-wrapper {
+	left:-10000px;
+	
+	position:absolute;	
+	top:49px;
+	width:96%;
+	padding:2%;
+	background-color:#fff;
+}
+
+/*#nav .level0-wrapper {
+	position:absolute;	
+	top:49px;
+	background-color:#fff;
+	width:96%;
+	padding:2%;
+
+	left:0;
+	visibility:hidden;
+	opacity:0;
+	transition:			visibility 0s ease-in-out 450ms, opacity 300ms ease-in-out 150ms;
+	-moz-transition:	visibility 0s ease-in-out 450ms, opacity 300ms ease-in-out 150ms;
+	-webkit-transition:	visibility 0s ease-in-out 450ms, opacity 300ms ease-in-out 150ms;
+	-o-transition:		visibility 0s ease-in-out 450ms, opacity 300ms ease-in-out 150ms;
+}
+#nav > li:hover .level0-wrapper {
+	visibility:visible;
+	opacity:1;
+	transition-delay:150ms;
+	-moz-transition-delay:150ms;
+	-webkit-transition-delay:150ms;
+	-o-transition-delay:150ms;
+}*/
+
+
+/* Additional custom elements in the main menu (horizontal)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Static blocks displayed as a drop-down in the main menu
+-------------------------------------------------------------- */
+/* Custom menu item */
+#nav .nav-custom-link > a { cursor:default; }
+
+/* Remove 'relative' positioning from custom 'li' (custom block have to be positioned relative to #nav) */
+#nav .nav-custom-link { position:static; }
+	
+/* Static block's content - basic formatting
+-------------------------------------------------------------- */
+#nav .nav-custom-link .header-nav-dropdown-wrapper { padding-bottom:10px; }
+#nav .nav-custom-link .header-nav-dropdown-wrapper p { margin:10px 0; }
+#nav .nav-custom-link .header-nav-dropdown-wrapper .heading { margin:10px 0; }
+
+/* Home link in the main menu
+-------------------------------------------------------------- */
+/* If enabled, show image home link */
+/*#nav-home.nav-home-img {}*/ /* Main selectors */
+#nav a.level-top.feature {
+	height:49px; /* Same height as element's wrappers TODO: */
+	margin:0; /* Remove default margins */
+}
+#nav a.level-top.feature > span { display:block; float:left; }
+#nav a.level-top .icon {
+	margin:6px 0 0 0; /* Align inside menu item */
+	background-color:transparent !important; /* Remove default colors */
+}
+
+
+/* Category labels
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.cat-label {
+	padding:2px 4px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	line-height:18px;
+	text-transform:none;
+	
+	transition:			color 450ms ease-in-out, background-color 450ms ease-in-out;
+	-moz-transition:	color 450ms ease-in-out, background-color 450ms ease-in-out;
+	-webkit-transition:	color 450ms ease-in-out, background-color 450ms ease-in-out;
+	-o-transition:		color 450ms ease-in-out, background-color 450ms ease-in-out;
+}
+li > a:hover > span > .cat-label {
+	transition-duration:			100ms;
+	-moz-transition-duration:		100ms;
+	-webkit-transition-duration:	100ms;
+	-o-transition-duration:			100ms;
+}
+
+/* 1st level
+-------------------------------------------------------------- */
+li.level0 > a > span { position:relative; }
+li.level0 > a > span > .cat-label {
+	position:absolute;
+	top:-14px;
+	right:0;
+	padding:0 6px;
+	
+	font-size:14px;
+	line-height:22px;
+}
+
+/* Add pin (only 1st level) */
+li.level0 > a > span > .pin-bottom:before {
+	position:absolute;
+	right:6px;
+	top:22px;
+	width:0;
+	height:0;
+	content:"";
+	border-style:solid;
+	border-width:4px;
+	border-color:transparent;
+
+	transition:			border-color 450ms ease-in-out;
+	-moz-transition:	border-color 450ms ease-in-out;
+	-webkit-transition:	border-color 450ms ease-in-out;
+	-o-transition:		border-color 450ms ease-in-out;
+}
+li.level0 > a:hover > span > .pin-bottom:before {
+	transition-duration:			100ms;
+	-moz-transition-duration:		100ms;
+	-webkit-transition-duration:	100ms;
+	-o-transition-duration:			100ms;
+}
+
+/* 2nd level
+-------------------------------------------------------------- */
+li.level1 > a > span > .cat-label {
+	display:inline-block !important;
+	padding:0 4px;
+	margin-left:2px;
+    vertical-align:top;
+}
+
+/* 3rd level
+-------------------------------------------------------------- */
+li.level2 > a > span > .cat-label {
+	display:inline-block !important;
+	padding:0 4px;
+	margin-left:2px;
+}
+
+/* Inside mobile menu / vertical menu
+-------------------------------------------------------------- */
+ul.vertnav li > a > span > .cat-label {
+	position:static;
+	display:inline-block !important;
+	padding:0 4px;
+	margin-left:2px;
+	font-size:inherit;
+	line-height:inherit;
+}
+/* Hide pin */
+ul.vertnav li.level0 > a > span > .pin-bottom:before {
+	display:none;
+}
+/* Hide category labels in vertical sidebar menu */
+/* ul.vertnav-side li > a > span > .cat-label { display:none !important; } */
+
+
+/* Category blocks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.nav-block {
+	margin-top:0;
+	margin-bottom:1%;
+}
+.nav-block-top {}
+.nav-block-bottom {}
+.nav-block-center {}
+.nav-block-right {}
+
+.nav-block-level1-top { margin-bottom:10px; }
+.nav-block-level1-bottom { margin-top:10px; }
+
+/* Section line (separator) is lighter than other lines
+-------------------------------------------------------------- */
+.nav-block .section-line { border-color:#eee; }

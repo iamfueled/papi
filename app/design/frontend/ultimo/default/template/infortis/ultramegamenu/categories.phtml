@@ -1,0 +1,15 @@
+<?php
+/**
+ * Use this template to display the sidebar menu inside static blocks and pages.
+ */
+?>
+<div class="block block-vertnav">
+	<div class="block-title">
+		<strong><span><?php echo $this->__('Categories'); ?></span></strong>
+	</div>
+	<div class="block-content">
+		<ul class="accordion accordion-style1 vertnav vertnav-side clearer">
+			<?php echo $this->renderCategoriesMenuHtml(TRUE, 0, 'level-top'); ?>
+		</ul>
+    </div>
+</div>

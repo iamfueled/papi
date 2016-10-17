@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <giftvoucher module="giftvoucher">
+            <title>Gift Card</title>
+            <sort_order>72</sort_order>
+            <children>
+                <giftvoucher module="giftvoucher">
+                    <title>Manage Gift codes</title>
+                    <sort_order>0</sort_order>
+                    <action>giftvoucheradmin/adminhtml_giftvoucher</action>
+                </giftvoucher>
+                <giftproduct module="giftvoucher">
+                    <title>Manage Gift Card Product</title>
+                    <sort_order>10</sort_order>
+                    <action>giftvoucheradmin/adminhtml_giftproduct</action>
+                </giftproduct>
+                <generategiftcard module="giftvoucher">
+                    <title>Generate Gift codes</title>
+                    <sort_order>20</sort_order>
+                    <action>giftvoucheradmin/adminhtml_generategiftcard</action>
+                </generategiftcard>
+                <settings module="giftvoucher">
+                    <title>Settings</title>
+                    <sort_order>100</sort_order>
+                    <action>adminhtml/system_config/edit/section/giftvoucher</action>
+                </settings>
+            </children>
+        </giftvoucher>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <giftvoucher translate="title">
+                                        <title>Gift Card</title>
+                                        <sort_order>45</sort_order>
+                                    </giftvoucher>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <giftvoucher>
+                        <title>Gift Card</title>
+                        <sort_order>10</sort_order>
+                        <children>
+                            <giftvoucher module="giftvoucher">
+                                <title>Manage Gift codes</title>
+                                <sort_order>0</sort_order>
+                                <action>giftvoucheradmin/adminhtml_giftvoucher</action>
+                            </giftvoucher>
+                            <giftproduct module="giftvoucher">
+                                <title>Manage Gift Card Product</title>
+                                <sort_order>10</sort_order>
+                                <action>giftvoucheradmin/adminhtml_giftproduct</action>
+                            </giftproduct>
+                            <generategiftcard module="giftvoucher">
+                                <title>Generate Gift codes</title>
+                                <sort_order>20</sort_order>
+                                <action>giftvoucheradmin/adminhtml_generategiftcard</action>
+                            </generategiftcard>
+                            <settings module="giftvoucher">
+                                <title>Settings</title>
+                                <sort_order>100</sort_order>
+                                <action>adminhtml/system_config/edit/section/giftvoucher</action>
+                            </settings>
+                        </children>
+                    </giftvoucher>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

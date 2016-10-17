@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Home_New>
+      <version>0.1.0</version>
+    </Home_New>
+  </modules>
+  <global>
+    <page>
+      <layouts>
+        <Home_With_Grid translate="label">
+          <label>Home_With_Grid</label>
+          <template>page/home-2.phtml</template>
+          <layout_handle>Homw_2</layout_handle>
+        </Home_With_Grid>
+        <!-- add more layouts here -->
+      </layouts>
+    </page>
+  </global>
+</config>

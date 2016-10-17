@@ -1,0 +1,291 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+
+
+<?php	
+	$theme = $this->helper('ultimo');	
+	$headerInnerBgColor		= $theme->getCfgDesign('header/inner_bg_color');
+	$navStretched			= $theme->getCfgDesign('nav/stretched');
+	$mainInnerBgColor		= $theme->getCfgDesign('main/inner_bg_color');
+	
+	//Header settings
+	$headerCss = array();
+	
+	if ($theme->isColor($headerInnerBgColor))
+	{
+		$headerCss[] = 'show-bg';
+	}
+	else
+	{
+		//If header has no color and menu is stretched, header is also stretched
+		if ($navStretched)
+		{
+			$headerCss[] = 'stretched';
+		}
+	}
+	
+	//Menu settings
+	$navCss = array();
+	
+	//Is menu stretched (full available width, margins are removed)
+	if ($navStretched)
+	{
+		$navCss[] = 'stretched';
+	}
+	
+	//If header or menu have bg color, nav also has bg color
+	if ($theme->isColor($headerInnerBgColor))
+	{
+		$navCss[] = 'show-bg';
+	}
+	elseif ($theme->isColor($mainInnerBgColor))
+	{
+		$navCss[] = 'show-bg';
+	}
+?>
+
+<style type="text/css">
+    @media only screen and (max-width: 550px),(min-device-width: 550px) and (max-device-width: 600px){
+        .fios{
+            background-color: transparent;
+            color: #333333;
+            display: block !important;
+            font-family: Lato,georgia,serif;
+            font-size: 16px;
+            line-height: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            position: absolute;
+            right: 12px;
+            text-transform: uppercase;
+        }
+        .fios2{
+        }
+        html body a#mobnav-trigger:hover{
+            background:transparent !important;
+            color: #00a9c7 !important;
+        }
+        .header-top-search-wrapper{
+            display:none;
+        }
+
+        .header-top-search-wrapper{
+            display:none;
+        }
+        #mini-cart{
+            display:none !important;
+        }
+        .top-links.show-separators ul.links{
+            padding-right:0 !important;
+        }
+         .user-menu{
+             display:none;
+         }
+    }
+</style>
+
+
+<div class="header-container" id="top">
+
+    <div class="header container<?php if($headerCss) echo " " . implode(" ", $headerCss); ?>">
+		<div class="grid-full">
+			
+			<div class="header-top clearer">
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_left')): ?>
+                    <div class="block_header_top_left item item-left"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_left2')): ?>
+                    <div class="block_header_top_left2 item item-left"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+                <div class="item item-left hide-below-960">
+                    <!-- <p class="welcome-msg"><?//php echo $this->getWelcome(); ?> <?//php echo $this->getAdditionalHtml(); ?></p> -->
+                </div>
+                
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right')): ?>
+                    <div class="block_header_top_right item item-right"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('currency'); ?>
+                <?php echo $this->getChildHtml('store_language'); ?>
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right2')): ?>
+                    <div class="block_header_top_right2 item item-right"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+            </div>
+            <?php echo $this->getChildHtml('topContainer'); ?>
+            
+            <!-- end: header-top %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+            
+            <div class="header-main v-grid-container">
+                <div class="logo-wrapper grid12-4 v-grid">
+                <?php if ($this->getIsHomePage()):?>
+                    <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+                <?php else:?>
+                    <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+                <?php endif?>
+                </div>
+                
+			<!--<div class="grid12-8 v-grid">-->	<!-- TODO:remove test!!!!!!!!!!!!!! -->
+            
+                <div class="header-top-search-wrapper grid12-4 v-grid clearer">
+                    <?php echo $this->getChildHtml('topSearch'); ?>
+                    <?php /*?><a class="advanced-search-link" href="<?php echo Mage::getURL(''); ?>catalogsearch/advanced/"><?php print $this->__('Advanced Search'); ?></a><?php */?>
+                </div>
+                
+                <div class="user-menu clearer grid12-4 v-grid">
+					
+					<?php echo $this->getChildHtml('cart_sidebar'); ?>
+                    <div class="after-mini-cart"></div>
+                    
+                    <div class="top-links show-separators">
+
+						<?php
+						if ($theme->getCfg('header/compare'))
+						{
+                        	$tmpHtml = $this->getChildHtml('compareMini');
+                        	if ($tmpHtml) echo $tmpHtml;
+						}
+                        ?>
+
+                        <?php
+                        //Additional custom Top Links
+                        if ($tmpHtml = $this->getChildHtml('block_header_top_links2'))
+                            echo $tmpHtml;
+                            
+                        //Default Magento top links (page.xml)
+                        if ($theme->getCfg('magento_blocks/top_links'))
+                            echo $this->getChildHtml('topLinks');
+                        
+                        //Custom top links - override Magento's default Top Links
+                        if ($tmpHtml = $this->getChildHtml('block_header_top_links'))
+                            echo $tmpHtml;
+                        ?>
+                    </div> <!-- end: top-links -->
+    
+                </div> <!-- end: user-menu -->
+                
+			<!--</div>-->	<!-- TODO:remove test!!!!!!!!!!! -->
+                
+            </div> <!-- end: header-main -->
+    
+        </div> <!-- end: grid unit -->
+    </div> <!-- end: header -->
+    
+	<div class="nav-container fios2">
+		<div class="nav container <?php if($navCss) echo " " . implode(" ", $navCss); ?>">
+			<?php echo $this->getChildHtml('topMenu') ?>
+		</div> <!-- end: nav -->
+	</div> <!-- end: nav-container -->
+	<div class="fios" style="display:none;">
+    	<?php if (! Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+        <a href="<?php echo Mage::helper('customer')->getLoginUrl(); ?>"><?php echo $this->__('Login / Register') ?></a>
+        <?php else: ?>
+        <a href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>"><?php echo $this->__('Logout') ?></a>
+        <?php endif; ?>
+	</div>
+
+    	<style type="text/css" media="screen">
+    	   .sale-banner{
+    	       font-size:16px;
+    	       text-align:center;
+    	       background-color:#0094c7;
+    	       display:block;
+    	       color:white;
+    	       padding:10px;
+    	       border-top:5px solid #333;
+    	   }
+    	   #nav{
+    	       border:none !important;
+    	   }
+    	   .sale-banner-details{
+    	       margin-left:30px;
+    	       padding-bottom:2px;
+    	       display: inline;
+    	   }
+    	   .sale-banner-details a{
+    	       font-size:12px;
+    	       color:white;
+    	       text-transform:uppercase;
+    	       border-bottom:1px solid white;
+    	   }
+    	   .sale-banner-details a:hover{
+    	       border-bottom:3px solid white;
+    	   }
+    	   .ui-widget-overlay{
+    	       opacity: 0.7 !important;
+    	   }
+
+    	</style>
+
+        <!-- Sale Banner -->
+
+        <?php if($this->getLayout()->createBlock('cms/block')->setBlockId('sale-banner')->toHtml()):?>
+        <div class="grid-full">
+            <div class="sale-banner">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sale-banner')->toHtml();?>
+                <?php if($this->getLayout()->createBlock('cms/block')->setBlockId('sale-banner-details-button')->toHtml()):?>
+                    <div class="sale-banner-details">
+                        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sale-banner-details-button')->toHtml();?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php endif;?>
+
+    </div> <!-- end: header-container -->
+
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+      <script type="text/javascript">
+      //<![CDATA[
+      var $j = jQuery.noConflict();
+           console.log('FUELED');
+
+           $j(function() {
+             $j( "#dialog-fueled" ).dialog({
+                 modal: true,
+                 autoOpen: false
+             });
+             $j( ".opener-fueled" ).click(function() {
+               $j( "#dialog-fueled" ).dialog( "open" );
+             });
+           });
+      //]] >
+      </script>
+
+    <div style="z-index:999999999 !important;" id="dialog-fueled" title="Sale Details">
+      <p><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sale-banner-details')->toHtml();?></p>
+    </div>
+    
+    
+    
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+ <global>
+  <page>
+   <layouts>
+    <custom_static_page_one>
+     <label>Sale Category with Dividers</label>
+     <template>page/sale-dividers.phtml</template>
+    </custom_static_page_one>
+    <custom_static_page_two>
+     <label>New Description Page</label>
+     <template>page/new-description.phtml</template>
+    </custom_static_page_two>
+   </layouts>
+  </page>
+ </global>
+</config>

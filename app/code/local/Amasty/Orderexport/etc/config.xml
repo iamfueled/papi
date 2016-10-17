@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+<config>
+
+    <modules>
+        <Amasty_Orderexport>
+            <version>2.6.2</version>
+        </Amasty_Orderexport>
+    </modules>
+    
+    
+    <admin>
+        <routers>
+            <amorderexport>
+                <use>admin</use>
+                <args>
+                    <module>Amasty_Orderexport</module>
+                    <frontName>orderexport</frontName>
+                </args>
+            </amorderexport>
+        </routers>
+    </admin>
+    
+    <frontend>
+        <routers>
+            <amexp>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_Orderexport</module>
+                    <frontName>amexp</frontName>
+                </args>
+            </amexp>
+        </routers>
+        <events>
+            <sales_model_service_quote_submit_after>
+                <observers>
+                    <amorderexport_automatically>
+                        <type>singleton</type>
+                        <class>amorderexport/AutomaticImport</class>
+                        <method>runAutomaticImport</method>
+                    </amorderexport_automatically>
+                </observers>
+            </sales_model_service_quote_submit_after>
+        </events>
+    </frontend>
+    
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <convert>
+                                    <children>
+                                        <orderexport translate="title">
+                                            <title>Amasty Orders Export</title>
+                                            <sort_order>-10</sort_order>
+                                            <children>
+                                                <orderexport translate="title">
+                                                    <title>Export Profiles</title>
+                                                    <sort_order>10</sort_order>
+                                                </orderexport>
+                                                <orderexport_link translate="title">
+                                                    <title>3-rd Party Data Export</title>
+                                                    <sort_order>20</sort_order>
+                                                </orderexport_link>
+                                            </children>
+                                        </orderexport>
+                                    </children>
+                                </convert>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <amorderexport translate="title" module="amorderexport">
+                                            <title>Efficient Order Export</title>
+                                        </amorderexport>
+                                    </children>
+                                </config>
+                            </children>
+                        </system> 
+                     </children>
+                </admin>
+            </resources>
+        </acl>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <amorderexport_automatically>
+                        <type>singleton</type>
+                        <class>amorderexport/AutomaticImport</class>
+                        <method>runAutomaticImport</method>
+                    </amorderexport_automatically>
+                </observers>
+            </sales_order_place_after>
+        <core_layout_block_create_after>
+                <observers>
+                    <amorderexport>
+                        <type>singleton</type>
+                        <class>amorderexport/observer</class>
+                        <method>modifyOrderGridAfterBlockGenerate</method>
+                    </amorderexport>
+                </observers>
+            </core_layout_block_create_after>
+        </events>
+        </adminhtml>
+    
+    <global>
+    
+        <models>
+            <amorderexport>
+                <class>Amasty_Orderexport_Model</class>
+                <resourceModel>amorderexport_mysql4</resourceModel>
+            </amorderexport>
+            <amorderexport_mysql4>
+                <class>Amasty_Orderexport_Model_Mysql4</class>
+                <entities>
+                    <profile>
+                        <table>amasty_amorderexport_profile</table>
+                    </profile>
+                    <profile_field>
+                        <table>amasty_amorderexport_profile_field</table>
+                    </profile_field>
+                    <profile_history>
+                        <table>amasty_amorderexport_profile_history</table>
+                    </profile_history>
+                    <link>
+                        <table>amasty_amorderexport_link</table>
+                    </link>
+                    <static_field>
+                        <table>amasty_amorderexport_static_field</table>
+                    </static_field>
+                </entities>
+            </amorderexport_mysql4>
+
+        </models>
+        
+		<resources>
+             <amorderexport_setup>
+                <setup>
+                    <module>Amasty_Orderexport</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amorderexport_setup>
+		    <amorderexport_write>
+		        <connection><use>core_write</use></connection>
+		    </amorderexport_write>
+		    <amorderexport_read>
+		        <connection><use>core_read</use></connection>
+		    </amorderexport_read>
+		</resources>
+		  
+        
+        <blocks>
+            <amorderexport>
+                <class>Amasty_Orderexport_Block</class>
+            </amorderexport>
+            
+        </blocks>
+        
+        <helpers>
+            <amorderexport>
+                <class>Amasty_Orderexport_Helper</class>
+            </amorderexport>
+            
+        </helpers>
+        
+    </global>
+    
+    
+    <default>
+        <amorderexport>
+           <export>
+               <file_date_format>dmyHis</file_date_format>
+           </export>
+           <run_by_url>
+                <enable>0</enable>
+                <sec_code></sec_code>
+           </run_by_url>
+        </amorderexport>
+    </default>
+    
+    
+</config>

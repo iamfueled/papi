@@ -1,0 +1,9 @@
+<?xml version="1.0"?> 
+<config> 
+	<modules> 
+		<whos_your_papi> 
+			<codePool>community</codePool> 
+			<active>true</active> 
+		</whos_your_papi> 
+	</modules> 
+</config>

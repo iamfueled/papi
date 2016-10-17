@@ -1,0 +1,21 @@
+<?php
+	/**
+	 * Gift Voucher product media template
+	*/
+?>
+<?php
+	$_product = $this->getProduct();
+	$_helper = $this->helper('catalog/output'); 
+?>
+<div class="giftvoucher-media">
+	<div class="giftmedia" id="giftmedia" style="display:none;"><pre id="giftmedia-pre"></pre></div>
+	<div class="giftmedia-image">
+	<?php
+		$_image = $this->helper('catalog/image')->init($_product, 'image');
+		$_height = 261 * $_image->getOriginalHeight() / $_image->getOriginalWidth();
+		$_image->resize(261,$_height);
+		$_img = '<img src="'.$_image.'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+		echo $_helper->productAttribute($_product, $_img, 'image');
+	?>
+	</div>
+</div>

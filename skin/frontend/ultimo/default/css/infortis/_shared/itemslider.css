@@ -1,0 +1,87 @@
+/**
+ * Itemslider
+ */
+
+
+
+/* Necessary styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.itemslider {margin: 0; padding: 0;}
+.itemslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.itemslider .slides img {max-width: 100%; display: block;}
+.pauseplay span {text-transform: capitalize;}
+
+/* Clearfix for the .slides element */
+.itemslider .slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .itemslider .slides {display: block;}
+* html .itemslider .slides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .itemslider .slides > li:first-child {display: block;}
+
+
+/* Itemslider styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Itemslider wrapper and navigation container */
+.itemslider-wrapper .nav-wrapper { position:relative; }
+
+/* Style: default
+-------------------------------------------------------------- */
+.itemslider { margin:0 auto; position:relative; zoom:1; }
+.itemslider .slides { zoom:1; }
+.itemslider .slides > li { position:relative; }
+.itemslider .slides img { margin:0 auto; /* To center image which has "display:block" */ }
+
+/* Style: horizontal
+-------------------------------------------------------------- */
+.itemslider-horizontal { margin:0 auto 20px; }
+.itemslider-horizontal .slides > li { padding-left:10px; padding-right:10px; }
+
+
+/* Itemslider mode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Quantized number of visible items
+-------------------------------------------------------------- */
+.itemslider-x			{ max-width:940px; }
+.itemslider-x.count-1	{ max-width:188px; } /*1*/
+.itemslider-x.count-2	{ max-width:376px; } /*2*/
+.itemslider-x.count-3	{ max-width:564px; } /*3*/
+.itemslider-x.count-4	{ max-width:752px; } /*4*/
+.itemslider-x.count-5	{ max-width:940px; } /*5*/
+.itemslider-x.count-6	{ max-width:1128px; } /*6*/
+.itemslider-x.count-7	{ max-width:1316px; } /*7*/
+.itemslider-x.count-8	{ max-width:1504px; } /*8*/
+
+	/* If slider is inside columns */
+	
+	/* Inside main column in 2-col layout */
+	.in-col2 .itemslider-x .slides > li { width:155px !important; }
+	.in-col2 .itemslider-x { max-width:700px; } /*4*/
+	
+	/* Inside main column in 3-col layout */
+	.in-col3 .itemslider-x .slides > li { width:134px !important; }
+	.in-col3 .itemslider-x { max-width:462px; } /*3*/
+	
+	/* In sidebar */
+	.in-sidebar .itemslider-x .slides > li { width:168px !important; }
+	.in-sidebar .itemslider-x { max-width:188px; } /*1*/
+
+
+/* Direction navigation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.itemslider .direction-nav { height:0; text-align:center; }
+
+
+/* Utility classes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.itemslider.hide-direction-nav .direction-nav { display:none; }
+.itemslider.hide-control-nav .control-nav { display:none; }

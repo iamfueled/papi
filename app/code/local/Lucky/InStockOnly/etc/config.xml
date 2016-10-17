@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config>
+
+<global>
+  <models>
+    <lucky_instockonly>
+      <class>Lucky_InStockOnly_Model</class>
+    </lucky_instockonly>
+  </models>
+</global>
+
+<frontend>
+  <events>
+    <catalog_block_product_list_collection>
+      <observers>
+        <lucky_instockonly_list>
+          <type>singleton</type>
+          <class>lucky_instockonly/observer</class>
+          <method>addInStockOnlyFilter</method>
+        </lucky_instockonly_list>
+      </observers>
+    </catalog_block_product_list_collection>
+  </events>
+</frontend>
+
+</config>

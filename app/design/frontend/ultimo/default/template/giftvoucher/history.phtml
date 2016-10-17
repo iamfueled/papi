@@ -1,0 +1,27 @@
+<?php
+/**
+ * Gift Voucher template
+ */
+?>
+<div class="customer-account-giftcard">
+    <div class="page-title">
+        <h1><?php echo $this->__('My Credit') ?></h1>
+    </div>
+    <div class="storecredit">
+        <div class="account-balance">
+            <h2 class="sub-title"><?php echo $this->__('Balance') ?></h2>
+            <?php echo $this->__('Your current balance is: ') ?><span class="regular-price"><?php echo $this->getBalanceAccount() ?></span>
+        </div>
+        <div class="account-balance">
+            <h2 class="sub-title"><?php echo $this->__('Redeem an eGift Card') ?></h2>
+            <?php echo $this->__('Have an eGift card? %s here to redeem it','<a href="'.$this->getUrl('giftvoucher/index/addredeem').'">'.$this->__('Click here').'</a>'); ?>
+        </div>
+    </div>
+    <div class="sub-title">
+        <?php echo $this->__('Balance History'); ?>
+    </div>
+    <?php echo $this->getGridHtml() ?>
+    <div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->getUrl('giftvoucher/index/index') ?>"><small>« </small><?php echo $this->__('Back') ?></a></p>
+    </div>
+</div>

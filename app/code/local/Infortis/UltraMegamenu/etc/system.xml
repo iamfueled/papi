@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <infortis translate="label">
+            <label>Infortis Extensions</label>
+            <sort_order>151</sort_order>
+        </infortis>
+    </tabs>
+    <sections>
+        <ultramegamenu translate="label">
+			<label>Menu</label>
+			<tab>infortis</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>100</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>Main Menu - General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<enable translate="label">
+							<label>Main Menu Bar</label>
+							<comment>Enable/disable entire main menu bar in the header section of the page.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</enable>
+						<mode translate="label">
+							<label>Main Menu Mode</label>
+							<comment>
+								<![CDATA[- <strong>Drop-down</strong> - standard drop-down menu<br/>
+								- <strong>Mobile</strong> - collapsible accordion dedicated for mobile devices<br/>
+								- <strong>Drop-down/Mobile</strong> - combination of both modes. You can specify width (see the <strong>Threshold</strong> field) of the browser viewport, below which the drop-down menu turns into the mobile menu.<br/>]]>
+							</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ultramegamenu/system_config_source_mainmenu_mode</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</mode>
+						<categories translate="label">
+							<label>Show Categories</label>
+							<comment>Enable to display categories in the main menu.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</categories>
+                    </fields>
+                </general>
+				<mainmenu translate="label">
+                    <label>Drop-down Main Menu</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<home translate="label">
+                            <label>Show Home Link Text</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </home>
+						<home_img translate="label">
+                            <label>Show Home Link Image</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </home_img>
+						<custom_block_floating translate="label">
+                            <label>Custom Block - Align Right</label>
+							<comment>
+								<![CDATA[To add custom block to the main menu you need to create a static block with ID <strong>block_header_nav_dropdown</strong>. Content of that static block will be displayed in the drop-down box. ]]>
+							</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </custom_block_floating>
+						
+						<heading_menustyle translate="label">
+							<label>Style of the main menu</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</heading_menustyle>
+						
+						<classic_menu translate="label">
+							<label>Enable Classic Style</label>
+							<comment>
+								<![CDATA[<strong>Important</strong>: Do not enable both styles at a time!]]>
+							</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</classic_menu>
+						<wide_menu translate="label">
+							<label>Enable Wide Style</label>
+							<comment>
+								<![CDATA[<strong>Important</strong>: Do not enable both styles at a time!]]>
+							</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</wide_menu>
+					</fields>
+				</mainmenu>
+				<widemenu translate="label">
+                    <label>Drop-down Main Menu - Wide Style</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<show_if_no_children translate="label">
+							<label>Show Category Blocks if No Sub-categories</label>
+							<comment>If set to "Yes", custom Category Blocks will be displayed in the drop-down box even if the category doesn't have any sub-categories.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</show_if_no_children>
+						<!--<column_count translate="label">
+							<label>Number of Columns</label>
+							<comment>Number of columns (from 2 to 7) in the drop-down box. Column of links contains: second-level category as a column heading and a list of third-level categories.</comment>
+                            <frontend_type>text</frontend_type>
+							<validate>validate-number validate-number-range number-range-2-7</validate>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</column_count>-->
+					</fields>
+				</widemenu>
+				<mobilemenu translate="label">
+                    <label>Mobile Main Menu</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<threshold translate="label">
+							<label>Threshold</label>
+							<comment>
+								<![CDATA[Width of the browser viewport (in pixels), below which the drop-down menu turns into a mobile menu (collapsible accordion) dedicated for mobile devices. <strong>Important</strong>: threshold is needed only if the menu is in <strong>Drop-down/Mobile</strong> mode. Values below 960 are not recommended - dropdown menus usually don't look good on narrow screens.]]>
+							</comment>
+                            <frontend_type>text</frontend_type>
+							<validate>validate-number validate-number-range number-range-480-9999</validate>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</threshold>
+					</fields>
+				</mobilemenu>
+				<sidemenu translate="label">
+                    <label>Sidebar Menu</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<enable translate="label">
+							<label>Sidebar Menu</label>
+							<comment>Enable/disable the list of categories displayed at the top of the sidebar, above the layered navigation.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</enable>
+						<hide_on_mobile translate="label">
+							<label>Hide Sidebar Menu on Mobile Devices</label>
+							<comment>Sidebar menu can be hidden on mobile devices (if browser viewport is narrower than 768 pixels). All categories are displayed in the top main menu by default so with this option you can save some space on mobile devices.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</hide_on_mobile>
+						<hide_laynav_categories translate="label">
+							<label>Hide Layered Navigation Category Filter</label>
+							<comment>If you enabled sidebar menu, you may want to disable category filter in Layered Navigation block ("Shop By").</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</hide_laynav_categories>
+					</fields>
+				</sidemenu>
+				<category_labels translate="label">
+                    <label>Category Labels</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<label1 translate="label">
+							<label>Label 1</label>
+							<comment>
+								<![CDATA[Define the text of the category label 1. Labels can be assigned to every category in Catalog > Manage Categories.]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</label1>
+						<label2 translate="label">
+							<label>Label 2</label>
+							<comment>
+								<![CDATA[Define the text of the category label 2. Labels can be assigned to every category in Catalog > Manage Categories.]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</label2>
+					</fields>
+				</category_labels>
+            </groups>
+        </ultramegamenu>
+    </sections>
+</config>

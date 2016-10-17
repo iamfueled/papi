@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+ <modules>
+  <Inchoo_AdditionalCmsPageLayouts>
+   <codePool>local</codePool>
+   <active>true</active>
+  </Inchoo_AdditionalCmsPageLayouts>
+ </modules>
+</config>

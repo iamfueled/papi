@@ -1,0 +1,45 @@
+var delay=3000;var start_frame=0;var el=0;var timeout=0;var timeout1=0;var timeout2=0;function init(){var lis=$('slide-images').getElementsByTagName('li');for(i=0;i<lis.length;i++){if(i!=0){lis[i].style.display='none';}}
+end_frame=lis.length-1;start_slideshow(start_frame,end_frame,delay,lis,el);}
+function start_slideshow(start_frame,end_frame,delay,lis,el){$('show_0').setAttribute("src","skin/frontend/toogas/default/images/active.png");$('show_0').addClassName('active');timeout=setTimeout(function(){fadeInOut(start_frame,start_frame,end_frame,delay,lis,el,timeout)},delay);}
+function fadeInOut(frame,start_frame,end_frame,delay,lis,el){lis=$('slide-images').getElementsByTagName('li');Effect.Fade(lis[frame]);if(frame==end_frame){frame=start_frame;}else{frame++;}
+lisAppear=lis[frame];if(el<end_frame)
+{var el=el+1;}
+else
+{var el=0;}
+if(el=='0')
+{$('show_'+end_frame).setAttribute("src","skin/frontend/toogas/default/images/not_active.png");$('show_'+end_frame).removeClassName('active');}
+$('show_'+el).setAttribute("src","skin/frontend/toogas/default/images/active.png");$('show_'+el).addClassName('active');if(el>0)
+{var temp=el-1;$('show_'+temp).setAttribute("src","skin/frontend/toogas/default/images/not_active.png");$('show_'+temp).removeClassName('active');}
+timeout1=setTimeout("Effect.Appear(lisAppear);",0);timeout2=setTimeout(function(){fadeInOut(frame,start_frame,end_frame,delay,null,el)},delay+1850);}
+function disableNextImage(){$('nextImg').setAttribute("onclick","changeNextImg()");}
+function disablePreviousImage(){$('previousImg').setAttribute("onclick","changePreviousImg()");}
+function changeNextImg(){clearTimeout(timeout);clearTimeout(timeout1);clearTimeout(timeout2);$('nextImg').setAttribute("onclick","");var start_frame=0;var lis=$('slide-images').getElementsByTagName('li');var end_frame=lis.length-1;var show=$('show').getElementsByTagName('img');for(i=0;i<show.length;i++)
+{if($(show[i].id).hasClassName('active'))
+{id=show[i].id;var temp1=id.split("_");if(temp1[1]==end_frame)
+{Effect.Fade(lis[temp1[1]]);var next_num=start_frame;}
+else
+{Effect.Fade(lis[temp1[1]]);var next_num=parseFloat(temp1[1])+parseFloat(1);}}}
+lisAppear=lis[next_num];$('show_'+next_num).setAttribute("src","skin/frontend/toogas/default/images/active.png");$('show_'+next_num).addClassName('active');for(i=0;i<lis.length;i++)
+{if(i!=next_num)
+{lis[i].style.display='none';}}
+for(i=0;i<show.length;i++)
+{if(show[i].id!='show_'+next_num)
+{$(show[i].id).setAttribute("src","skin/frontend/toogas/default/images/not_active.png");$(show[i].id).removeClassName('active');}}
+setTimeout("Effect.Appear(lisAppear);",0);setTimeout("disableNextImage()",1000);}
+function changePreviousImg(){clearTimeout(timeout);clearTimeout(timeout1);clearTimeout(timeout2);$('previousImg').setAttribute("onclick","");var start_frame=0;var lis=$('slide-images').getElementsByTagName('li');var end_frame=lis.length-1;var show=$('show').getElementsByTagName('img');for(i=0;i<show.length;i++)
+{if($(show[i].id).hasClassName('active'))
+{id=show[i].id;var temp1=id.split("_");if(temp1[1]==start_frame)
+{Effect.Fade(lis[temp1[1]]);var previous_num=end_frame;}
+else
+{Effect.Fade(lis[temp1[1]]);var previous_num=temp1[1]-1;}}}
+lisAppear=lis[previous_num];$('show_'+previous_num).setAttribute("src","skin/frontend/toogas/default/images/active.png");$('show_'+previous_num).addClassName('active');for(i=0;i<lis.length;i++)
+{if(i!=previous_num)
+{lis[i].style.display='none';}}
+for(i=0;i<show.length;i++)
+{if(show[i].id!='show_'+previous_num)
+{$(show[i].id).setAttribute("src","skin/frontend/toogas/default/images/not_active.png");$(show[i].id).removeClassName('active');}}
+setTimeout("Effect.Appear(lisAppear);",0);setTimeout("disablePreviousImage()",1000);}
+Event.observe(window,'load',init,false);function showSearch()
+{if($('form-search').hasClassName('hidesearch'))
+{$('form-search').removeClassName('hidesearch');}
+else{$('form-search').addClassName('hidesearch');}}

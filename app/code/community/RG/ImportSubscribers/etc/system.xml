@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/** 
+ * @author Ruslan Gumennyi <ruslan.gumennyi@gmail.com>
+ * @package RG_ImportSubscribers
+ * 
+ * This simple extension allows you to import your subscriber list 
+ * from previously exported file as well as from scratch. 
+ * Currently supported file formats: 
+ * 		txt (only list of emails, one per line),
+ * 		csv ('Email' is required field, other can be omitted) 
+ * 		Excel XML (same as csv)  
+ * 
+ * Order of the columns can be anything, but it's important to pass correct headings, 
+ * for example: 'Email' (not 'email'), 'Store View', 'Status', etc. 
+ * 
+ * Valid column names (any other will be ignored):
+ * 		Email - email addresses
+ * 		
+ * 		Type  - can be Customer or Guest 
+ * 			    IMPORTANT: If the Type specified as Customer, but the client 
+ * 				with such e-mail doesn't exist, it will be saved as Guest
+ * 		
+ * 		Status - One of Subscribed, Unsubscribed, Not Activated, Unconfirmed  
+ * 		
+ * 		Store View - name of your site's store view in which you want 
+ * 					 insert subscribers list (must be created prior to proccess,
+ * 					 otherwise default will be used ) 
+ * 
+ * If count of rows in your file more than 50-60 thousands, 
+ * you'd better break it for several smaller parts.
+ * On my testing environment it took me 94 sec (1 min 34 sec) 
+ * for importing 50000 rows with registered customers.
+ * 
+ * IMPORTANT: It doesn't care of duplicates, so you should remove them manualy 
+ * prior to import       
+ * 
+ */
+ -->
+
+<config>
+    <sections>
+        <newsletter>
+            <groups>
+                <import_subscribers translate="label">
+                    <label>Import Subscribers</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>9</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <import translate="label">
+                            <label>Choose File</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>importsubscribers/adminhtml_import</backend_model>							
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </import>
+                    </fields>
+                </import_subscribers>
+            </groups>
+        </newsletter>
+    </sections>
+</config>

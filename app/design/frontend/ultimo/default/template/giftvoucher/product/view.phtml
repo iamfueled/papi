@@ -1,0 +1,152 @@
+<?php
+	/**
+	 * Gift Voucher View Product template
+	*/
+?>
+<?php
+	$_product = $this->getProduct();
+	$_giftAmount = $this->getGiftAmount($_product);
+	$_formData = $this->getFormConfigData();
+?>
+<div class="giftvoucher-product-info">
+	<?php if ($_giftAmount['type'] == 'range'): ?>
+		<p></p><p>
+			<label for="amount"><?php echo $this->__('Enter Amount:') ?></label>
+			<input id="amount" name="amount" class="input-text required-entry validate-greater-than-zero" onchange="validateInputRange(this);" value="<?php echo $_formData->getAmount() ?>" />
+			(<span class="price"><?php echo $_giftAmount['from_txt'] ?></span> -  <span class="price"><?php echo $_giftAmount['to_txt'] ?></span>)
+			<script type="text/javascript">
+			//<![CDATA[
+			function validateInputRange(el){
+				var gift_amount_min = <?php echo $_giftAmount['from'] ?>;
+				var gift_amount_max = <?php echo $_giftAmount['to'] ?>;
+				if (el.value < gift_amount_min)
+					el.value = gift_amount_min;
+				if (el.value > gift_amount_max)
+					el.value = gift_amount_max;
+			}
+			//]]>
+			</script>
+		</p>
+	<?php elseif($_giftAmount['type'] == 'dropdown'): ?>
+		<p></p><p>
+			<label for="amount"><?php echo $this->__('Select Amount:') ?></label>
+			<select id="amount" name="amount" class="required-entry select">
+			<?php $options = array_combine($_giftAmount['options'],$_giftAmount['options_txt']) ?>
+			<?php foreach ($options as $value=>$label): ?>
+				<option value="<?php echo $value ?>" <?php if($value == $_formData->getAmount()) echo 'selected' ?> ><?php echo $label ?></option>
+			<?php endforeach ?>
+			</select>
+		</p>
+	<?php elseif($_giftAmount['type'] == 'static'): ?>
+		<div class="price-box">
+			<span class="regular-price">
+				<span class="price">
+					<?php echo $_giftAmount['value_txt'] ?>
+					<input type="hidden" name="amount" value="<?php echo $_giftAmount['value'] ?>" />
+				</span>
+			</span>
+		</div>
+	<?php elseif($_giftAmount['type'] == 'any'): ?>
+		<p></p><p>
+			<label for="amount"><?php echo $this->__('Enter Amount:') ?></label>
+			<input id="amount" name="amount" class="input-text required-entry validate-greater-than-zero" value="<?php echo $_formData->getAmount() ?>" />
+		</p>
+	<?php endif ?>
+    <?php if ($this->getGiftAmountDescription()): ?>
+        <p class="giftvoucher-amount-desc"><?php echo $this->getGiftAmountDescription() ?></p>
+    <?php endif ?>
+	<p>
+		<input type="checkbox" value="1" name="send_friend" id="send_friend" onclick="sendFriend(this);" <?php if ($_formData->getSendFriend()) echo 'checked' ?> />
+		<label for="send_friend"><?php echo $this->__('Send eGift Card to friend') ?></label>
+		<script type="text/javascript">
+		//<![CDATA[
+		function sendFriend(el){
+			var receiver = $('giftvoucher-receiver');
+			var giftmedia = $('giftmedia');
+			if (el.checked){
+				if (receiver) receiver.show();
+				if (giftmedia) giftmedia.show();
+			}else{
+				if (receiver) receiver.hide();
+				if (giftmedia) giftmedia.hide();
+			}
+		}
+		//]]>
+		</script>
+	</p>
+	<div class="giftvoucher-receiver" id="giftvoucher-receiver" style="<?php if (!$_formData->getSendFriend()) echo 'display:none;' ?>">
+		<p>
+			<label for="recipient_name"><?php echo $this->__('Recipient Name:') ?></label><br />
+			<input type="text" class="input-text required-entry" name="recipient_name" id="recipient_name" value="<?php echo $_formData->getRecipientName() ?>" />
+		</p>
+		<p>
+			<label for="recipient_email"><?php echo $this->__('Recipient Email:') ?></label><br />
+			<input type="text" class="input-text required-entry validate-email" name="recipient_email" id="recipient_email" value="<?php echo $_formData->getRecipientEmail() ?>" />
+		</p>
+		<?php if ($this->enablePhysicalMail()): ?>
+		<p>
+			<input type="checkbox" value="<?php echo $this->__('Yes') ?>" name="recipient_ship" id="recipient_ship" onclick="shipToFriend(this);" <?php if($_formData->getRecipientShip()) echo 'checked' ?> />
+			<label for="recipient_ship"><?php echo $this->__('Send through post office') ?></label>
+            <p id="recipient_ship_desc"><?php echo $this->__("You need to add your friend's address as the shipping address in Checkout page. We will send this eGift Card to that address.") ?></p>
+			<p id="postal_address" style="display:none;">
+				<label for="recipient_address"><?php echo $this->__('Postal Address:') ?></label><br />
+				<textarea name="recipient_address" id="recipient_address"></textarea>
+			</p>
+			<script type="text/javascript">
+			//<![CDATA[
+			function shipToFriend(el){
+				if (el.checked) {
+                    $('recipient_ship_desc').show();
+					// $('postal_address').show();
+                } else {
+                    $('recipient_ship_desc').hide();
+					// $('postal_address').hide();
+                }
+			}
+            shipToFriend($('recipient_ship'));
+			//]]>
+			</script>
+		</p>
+		<?php endif ?>
+		<?php if ($this->enableCustomMessage()): ?>
+		<p>
+			<label for="message"><?php echo $this->__('Custom message') ?></label><br />
+			<textarea name="message" id="message" class="required-entry" onchange="changeRemaining(this);" onkeyup="changeRemaining(this);"><?php echo $_formData->getMessage() ?></textarea><br />
+			<small><?php echo $this->__('Characters Remaining: ') ?><span id="giftvoucher_char_remaining"><?php echo $this->messageMaxLen() ?></span></small>
+			<script type="text/javascript">
+			//<![CDATA[
+			var remaining_max = <?php echo $this->messageMaxLen() ?>;
+			function changeRemaining(el){
+				if (el.value.length > remaining_max){
+					el.value = el.value.substring(0,remaining_max);
+				}
+				$('giftvoucher_char_remaining').innerHTML = remaining_max - el.value.length;
+				var giftmedia = $('giftmedia-pre');
+				if (giftmedia)
+					giftmedia.innerHTML = el.value;
+			}
+			//]]>
+			</script>
+		</p>
+		<?php endif ?>
+        <?php if ($this->enableScheduleSend()): ?>
+            <?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml() ?>
+            <p>
+                <label for="day_to_send"><?php echo $this->__('Day To Send:') ?></label><br />
+                <input type="text" class="input-text" name="day_to_send" id="day_to_send" value="<?php echo $_formData->getDayToSend() ?>" />
+                <img src="<?php echo Mage::getBaseUrl('skin')?>/adminhtml/default/default/images/grid-cal.gif" alt="<?php echo $this->__('Select Date') ?>" class="v-middle" id="calendar-day_to_send" />
+            </p>
+            <script type="text/javascript">
+                Calendar.setup({
+                    inputField: "day_to_send",
+                    ifFormat: "%m/%e/%y",
+                    showsTime: false,
+                    button: "calendar-day_to_send",
+                    align: "Bl",
+                    singleClick : true
+                });
+            </script>
+        <?php endif ?>
+	</div>
+	<p></p>
+</div>

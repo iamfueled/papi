@@ -1,0 +1,10 @@
+<?php $_product = $this->getProduct();
+$attribute = $_product->getResource()->getAttribute('store_locator');
+if ( is_object($attribute) ) {
+$identifier = $_product->getData("store_locator");
+}?>
+<?php if ($_sizeBlock = Mage::app()->getLayout()->createBlock('cms/block')->setBlockId($identifier)): ?>
+<div class="std">
+    <?php echo $_sizeBlock->toHtml() ?>
+</div>
+<?php endif; ?>
